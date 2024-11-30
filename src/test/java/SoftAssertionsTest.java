@@ -1,4 +1,6 @@
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -8,10 +10,9 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class SoftAssertionsTest {
   @BeforeAll
-  static void beforeAll() {
+  static void setup() {
     Configuration.browserSize = "1920x1080";
     Configuration.browser = "edge";
- //   Configuration.pageLoadStrategy = "eager";
   }
   @Test
   void findExampleJUnit5() {
@@ -28,5 +29,9 @@ public class SoftAssertionsTest {
     $(".markdown-body").shouldHave(text("Example:"));
     $(".repository-content ").shouldHave(text("<div id='first' style='display:none;'>First</div>\n" +
       "  <div id='second' style='display:none;'>Second</div>"));
+  }
+  @AfterEach
+    void teardown() {
+      Selenide.closeWebDriver();
   }
 }
