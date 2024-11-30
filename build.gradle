@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group = 'alice-lilo'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(
+            "com.codeborne:selenide:7.5.1",
+            'com.codeborne:phantomjsdriver:1.5.0',
+            'org.junit.jupiter:junit-jupiter-api:5.11.2',
+            "org.junit.jupiter:junit-jupiter:5.10.0",
+            'org.slf4j:slf4j-simple:2.0.7',
+    )
+}
+
+test {
+    useJUnitPlatform()
+}
