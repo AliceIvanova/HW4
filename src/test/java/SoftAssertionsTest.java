@@ -27,10 +27,20 @@ public class SoftAssertionsTest {
     $(byText("Soft assertions")).click();
     //-проверьте что внутри есть пример кода для JUnit5
     $(".markdown-body").shouldHave(text("Example:"));
-    $(".repository-content ").shouldHave(text("<div id='first' style='display:none;'>First</div>\n" +
-      "  <div id='second' style='display:none;'>Second</div>"));
+    $(".repository-content ").shouldHave(text("@ExtendWith({SoftAssertsExtension.class})\n" +
+      "class Tests {\n" +
+      "  @Test\n" +
+      "  void test() {\n" +
+      "    Configuration.assertionMode = SOFT;\n" +
+      "    open(\"page.html\");\n" +
+      "\n" +
+      "    $(\"#first\").should(visible).click();\n" +
+      "    $(\"#second\").should(visible).click();\n" +
+      "  }\n" +
+      "}"));
+  sleep(20000);
   }
-  @AfterEach
+    @AfterEach
     void teardown() {
       Selenide.closeWebDriver();
   }
